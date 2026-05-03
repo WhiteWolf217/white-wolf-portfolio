@@ -236,7 +236,7 @@ const App: React.FC = () => {
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Internship Experience</h3>
                 <p className="text-xl font-semibold mb-2">Cybersecurity Research Intern</p>
-                <p className="text-lg mb-2">DAU, May - July 2025</p>
+                <p className="text-lg mb-2">Dhirubhai Ambani University, May - July 2025</p>
                 <p className="text-lg">Developed GNN-based intrusion detection system and conducted advanced security research on network anomaly detection.</p>
               </div>
               <div className="mb-6">
