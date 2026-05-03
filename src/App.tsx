@@ -231,12 +231,12 @@ const App: React.FC = () => {
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Education</h3>
                 <p className="text-xl mb-2">B.Tech in Electronics & Communication Engineering</p>
-                <p className="text-lg">Lovely Naamd Delhi Institute of Technology (LNMIT), 2024-2028</p>
+                <p className="text-lg">The LNM Institute of Information Technology(LNMIIT), 2024-2028</p>
               </div>
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Internship Experience</h3>
                 <p className="text-xl font-semibold mb-2">Cybersecurity Research Intern</p>
-                <p className="text-lg mb-2">DAHU, May - July 2025</p>
+                <p className="text-lg mb-2">DAU, May - July 2025</p>
                 <p className="text-lg">Developed GNN-based intrusion detection system and conducted advanced security research on network anomaly detection.</p>
               </div>
               <div className="mb-6">
