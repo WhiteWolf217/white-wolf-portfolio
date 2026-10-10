@@ -12,9 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const phrases = [
-                "Cybersecurity Enthusiast",
-                "Aspiring Security Engineer",
-                "Ethical Hacker"
+                "Offensive Security Engineer",
+                "OT/ICS Security Engineer",
+                "Red Team Automation",
+                "Bug Bounty Hunter",
+                "CTF Competitor"
             ];
 
             let phraseIndex = 0;
