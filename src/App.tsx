@@ -48,7 +48,8 @@ const results = [
   {
     name: "FamPay Security CTF",
     score: "1,850 / 1,850",
-    description: "Perfect score across all six challenges.",
+    description: "33rd place with a perfect score across all six challenges.",
+    scoreboard: "https://ctf.fampay.co/scoreboard",
   },
   {
     name: "Hack The Box University CTF 2025",
@@ -190,6 +191,7 @@ function App() {
                   <h3>{result.name}</h3>
                   <strong>{result.score}</strong>
                   <p>{result.description}</p>
+                  {result.scoreboard && <a className="text-link" href={result.scoreboard}>Official scoreboard <span aria-hidden="true">↗</span></a>}
                 </article>
               ))}
             </div>
