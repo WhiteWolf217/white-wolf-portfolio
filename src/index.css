@@ -124,6 +124,14 @@ nav .nav-contact { padding: .65rem 1rem; border: 1px solid var(--line); border-r
 .credentials { padding: clamp(1.15rem, 3vw, 1.85rem); }
 .credentials dl > div { border-top: 1px solid var(--line); padding-top: .75rem; margin-top: .75rem; }
 .credentials h3 { font-size: 1.4rem; }
+.devsecops-focus { display: grid; grid-template-columns: 1fr 1.3fr; align-items: start; gap: clamp(1rem, 4vw, 3rem); margin-top: 2rem; padding: clamp(1.15rem, 3vw, 1.85rem); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.devsecops-focus h3 { margin-bottom: .4rem; }
+.devsecops-focus p { max-width: 30rem; color: var(--muted); font-size: .94rem; }
+.devsecops-focus ul { list-style: none; margin: 0; padding: 0; }
+.devsecops-focus li { display: grid; gap: .15rem; padding-block: .55rem; }
+.devsecops-focus li + li { border-top: 1px solid var(--line); }
+.devsecops-focus li strong { font-size: .89rem; }
+.devsecops-focus li span { color: var(--muted); font-size: .84rem; line-height: 1.55; }
 .toolkit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.75rem; margin-top: 2rem; padding-top: 1.15rem; border-top: 1px solid var(--line); }
 .toolkit dt { font-size: .91rem; font-weight: 700; margin-bottom: .35rem; }
 .toolkit dd { font: 500 .75rem/1.55 var(--mono); color: var(--muted); }
@@ -154,7 +162,7 @@ nav .nav-contact { padding: .65rem 1rem; border: 1px solid var(--line); border-r
   .proof-band > div:nth-child(3) { border-left: 0; }
   .proof-band > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .section-heading { align-items: start; flex-direction: column; gap: .6rem; }
-  .feature, .spectre-feature, .project-grid, .competition-grid, .badge-block, .experience-layout, .toolkit { grid-template-columns: 1fr; }
+  .feature, .spectre-feature, .project-grid, .competition-grid, .badge-block, .experience-layout, .devsecops-focus, .toolkit { grid-template-columns: 1fr; }
   .spectre-facts { border-left: 0; border-top: 1px solid var(--line); padding-left: 0; }
   .contact { align-items: start; flex-direction: column; }
 }

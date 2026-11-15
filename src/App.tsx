@@ -105,13 +105,13 @@ function App() {
       <main id="home">
         <section className="shell hero" aria-labelledby="site-title">
           <div className="hero-copy">
-            <p className="eyebrow"><span /> Offensive security portfolio</p>
+            <p className="eyebrow"><span /> Offensive Security &amp; DevOps</p>
             <h1 id="site-title">White <span>Wolf</span></h1>
             <p className="hero-summary">Active Directory, web and API security, and reverse engineering.</p>
-            <p className="hero-detail">I practice in labs, compete in CTFs, and build tools that make security investigations easier to follow.</p>
+            <p className="hero-detail">I build tools for security investigations and am growing my DevOps experience with containers, cloud infrastructure, and CI/CD.</p>
             <div className="actions">
               <a className="button primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a>
-              <a className="button secondary" href="#hack-the-box">Hack The Box results</a>
+              <a className="button secondary" href="#devsecops">DevSecOps practice</a>
             </div>
           </div>
           <div className="hero-art">
@@ -241,9 +241,20 @@ function App() {
               </dl>
             </aside>
           </div>
+          <section className="devsecops-focus" id="devsecops" aria-labelledby="devsecops-title">
+            <div>
+              <h3 id="devsecops-title">DevSecOps in practice</h3>
+              <p>I’m building on my offensive security work by learning how to deploy systems and bring security checks into delivery pipelines.</p>
+            </div>
+            <ul>
+              <li><strong>Kubernetes &amp; Helm</strong><span>Deployed MetaDefender Core with PostgreSQL.</span></li>
+              <li><strong>Docker &amp; Google Cloud</strong><span>Ran isolated challenge environments for LNMHacks 8.0.</span></li>
+              <li><strong>GitHub Actions</strong><span><a className="text-link" href={`${github}/white-wolf-portfolio/actions`}>Builds and deploys this portfolio to GitHub Pages.</a></span></li>
+            </ul>
+          </section>
           <dl className="toolkit" aria-label="Technical toolkit">
             <div><dt>Security testing</dt><dd>Active Directory · Burp Suite · Wireshark · Ghidra</dd></div>
-            <div><dt>Infrastructure</dt><dd>OT data diodes · Kubernetes · Helm · Docker · Google Cloud</dd></div>
+            <div><dt>Infrastructure &amp; delivery</dt><dd>OT data diodes · Kubernetes · Helm · Docker · Google Cloud · GitHub Actions</dd></div>
             <div><dt>Development</dt><dd>Python · TypeScript · Java · Bash · PowerShell</dd></div>
           </dl>
         </section>
