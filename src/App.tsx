@@ -1,3 +1,5 @@
+import { projectCatalog } from "./projectCatalog";
+
 const logo = `${import.meta.env.BASE_URL}assets/images/white-wolf-mark.jpg`;
 const github = "https://github.com/WhiteWolf217";
 const htb = "https://profile.hackthebox.com/profile/019c8a07-e0c4-7293-a1a2-f0b469ed1f0f";
@@ -115,9 +117,9 @@ function App() {
         <section className="shell content-section" id="projects">
           <div className="section-heading">
             <h2>Selected work</h2>
-            <a className="text-link" href={`${github}?tab=repositories`}>Browse repositories <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href="#project-catalog">View all projects <span aria-hidden="true">↓</span></a>
           </div>
-          <article className="feature">
+          <article className="feature" id="chainxray">
             <div className="feature-copy">
               <p className="eyebrow">Flagship project · Web3 security</p>
               <h3>ChainXray</h3>
@@ -135,6 +137,19 @@ function App() {
               </ol>
             </div>
           </article>
+          <article className="spectre-feature" id="spectre" aria-labelledby="spectre-title">
+            <div className="spectre-intro">
+              <p className="eyebrow">Red-team research · Local LLMs</p>
+              <h3 id="spectre-title">SPECTRE</h3>
+              <p className="spectre-lead">I built SPECTRE to study how a local language model can help coordinate an authorized red-team engagement.</p>
+              <p className="spectre-detail">The model can draft and revise a plan as new information comes in. The documented design requires operator confirmation before each tool run and records findings for review and reporting.</p>
+            </div>
+            <dl className="spectre-facts">
+              <div><dt>Local planning</dt><dd>A locally run model proposes and updates a plan.</dd></div>
+              <div><dt>Operator review</dt><dd>Individual actions go through an approval step.</dd></div>
+              <div><dt>Engagement reporting</dt><dd>Records findings and maps them to MITRE ATT&amp;CK for reports.</dd></div>
+            </dl>
+          </article>
           <div className="project-grid">
             {projects.map(project => (
               <article className="project-card" key={project.title}>
@@ -147,7 +162,30 @@ function App() {
               </article>
             ))}
           </div>
-          <p className="research-note"><strong>Lab projects</strong> · SPECTRE explored engagement documentation and MITRE ATT&amp;CK mapping. PhantomNet was an ESP8266 Wi-Fi security research project.</p>
+          <section className="catalog" id="project-catalog" aria-labelledby="catalog-title">
+            <div className="catalog-heading">
+              <div>
+                <h3 id="catalog-title">Project catalog</h3>
+                <p>Public repositories, including research, practice projects, and forks.</p>
+              </div>
+              <a className="text-link" href={`${github}?tab=repositories`}>Browse on GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+            <div className="catalog-grid">
+              {projectCatalog.map(group => (
+                <section className="catalog-group" key={group.name}>
+                  <h4>{group.name}</h4>
+                  <ul>
+                    {group.entries.map(entry => (
+                      <li key={entry.repository} data-repository={entry.repository}>
+                        {entry.href ? <a href={entry.href}>{entry.name}</a> : <strong>{entry.name}</strong>}
+                        <p>{entry.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </section>
         </section>
 
         <section className="section-band" id="hack-the-box">
