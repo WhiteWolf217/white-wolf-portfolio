@@ -100,7 +100,7 @@ nav .nav-contact { padding: .65rem 1rem; border: 1px solid var(--line); border-r
 .research-note strong { color: var(--ink); }
 
 .section-band { background: #0e1020; border-block: 1px solid var(--line); }
-.competition-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.competition-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .competition { padding: clamp(1.15rem, 2.5vw, 1.75rem); display: grid; align-content: start; gap: .7rem; }
 .competition h3 { color: var(--ink); font: 600 .85rem/1.4 Inter, system-ui, sans-serif; letter-spacing: 0; }
 .competition > strong { color: var(--violet); font: 750 clamp(1.8rem, 3.45vw, 3rem)/1.02 var(--display); letter-spacing: -.065em; }

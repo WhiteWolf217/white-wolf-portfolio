@@ -46,10 +46,16 @@ const results = [
     description: "Tasks solved solo. 8,725 points and 139th of 5,637 teams.",
   },
   {
+    name: "Operation Cymbal: Cold Room",
+    score: "18 / 18",
+    description: "Challenges solved solo. 2,075 points and 222nd of 1,677 teams.",
+    link: { label: "Hack The Box event", href: "https://ctf.hackthebox.com/event/details/operation-cymbal-cold-room-3631" },
+  },
+  {
     name: "FamPay Security CTF",
     score: "1,850 / 1,850",
     description: "33rd place with a perfect score across all six challenges.",
-    scoreboard: "https://ctf.fampay.co/scoreboard",
+    link: { label: "Official scoreboard", href: "https://ctf.fampay.co/scoreboard" },
   },
   {
     name: "Hack The Box University CTF 2025",
@@ -191,7 +197,7 @@ function App() {
                   <h3>{result.name}</h3>
                   <strong>{result.score}</strong>
                   <p>{result.description}</p>
-                  {result.scoreboard && <a className="text-link" href={result.scoreboard}>Official scoreboard <span aria-hidden="true">↗</span></a>}
+                  {result.link && <a className="text-link" href={result.link.href}>{result.link.label} <span aria-hidden="true">↗</span></a>}
                 </article>
               ))}
             </div>
