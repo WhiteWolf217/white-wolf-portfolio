@@ -1,5 +1,3 @@
-import { projectCatalog } from "./projectCatalog";
-
 const logo = `${import.meta.env.BASE_URL}assets/images/white-wolf-mark.jpg`;
 const github = "https://github.com/WhiteWolf217";
 const htb = "https://profile.hackthebox.com/profile/019c8a07-e0c4-7293-a1a2-f0b469ed1f0f";
@@ -14,16 +12,30 @@ const navigation = [
 
 const projects = [
   {
-    title: "Static analysis for Java",
-    stack: "SAST-JAVA · JavaParser · Maven",
-    description: "A lightweight source scanner that helps reviewers spot common application security issues in Java code.",
-    links: [["View source", `${github}/SAST-JAVA`]],
-  },
-  {
     title: "Graph-based intrusion detection",
     stack: "DA-IICT research · Python · CICIDS2017",
     description: "I built offline and live prototypes that represent network flows as graphs so a classifier can flag suspicious traffic.",
     links: [["Live prototype", `${github}/RealTime-Intrusion-Detection-GNNs`], ["Offline prototype", `${github}/Static-Intrusion-Detection-GNNs`]],
+  },
+  {
+    title: "OT syslog pipeline",
+    stack: "OPSWAT–Pelorus · Python · Flask",
+    description: "Built a pipeline that forwarded syslog events through a Fend optical data diode to a live dashboard. It gave the receiving team visibility into events without opening a return path.",
+  },
+  {
+    title: "MetaDefender on Kubernetes",
+    stack: "OPSWAT–Pelorus · Helm · kind · PostgreSQL",
+    description: "Deployed MetaDefender Core with Helm and in-cluster PostgreSQL. Documented the setup after resolving storage and release configuration issues.",
+  },
+  {
+    title: "PhantomNet",
+    stack: "ESP8266 · Wi-Fi security research",
+    description: "Built an ESP8266 lab project to explore Wi-Fi security and study what nearby devices expose. Used controlled environments for testing.",
+  },
+  {
+    title: "LNMHacks 8.0",
+    stack: "CTF infrastructure · Google Cloud · Docker",
+    description: "Containerized CTF challenges and managed their lifecycle on Google Cloud, giving individual challenges isolated environments during the event.",
   },
 ];
 
@@ -117,7 +129,7 @@ function App() {
         <section className="shell content-section" id="projects">
           <div className="section-heading">
             <h2>Selected work</h2>
-            <a className="text-link" href="#project-catalog">View all projects <span aria-hidden="true">↓</span></a>
+            <a className="text-link" href="#spectre">SPECTRE case study <span aria-hidden="true">↓</span></a>
           </div>
           <article className="feature" id="chainxray">
             <div className="feature-copy">
@@ -156,36 +168,14 @@ function App() {
                 <p className="stack">{project.stack}</p>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
-                <div className="project-links">
-                  {project.links.map(([label, href]) => <a className="text-link" key={href} href={href}>{label} <span aria-hidden="true">↗</span></a>)}
-                </div>
+                {project.links && (
+                  <div className="project-links">
+                    {project.links.map(([label, href]) => <a className="text-link" key={href} href={href}>{label} <span aria-hidden="true">↗</span></a>)}
+                  </div>
+                )}
               </article>
             ))}
           </div>
-          <section className="catalog" id="project-catalog" aria-labelledby="catalog-title">
-            <div className="catalog-heading">
-              <div>
-                <h3 id="catalog-title">Project catalog</h3>
-                <p>Public repositories, including research, practice projects, and forks.</p>
-              </div>
-              <a className="text-link" href={`${github}?tab=repositories`}>Browse on GitHub <span aria-hidden="true">↗</span></a>
-            </div>
-            <div className="catalog-grid">
-              {projectCatalog.map(group => (
-                <section className="catalog-group" key={group.name}>
-                  <h4>{group.name}</h4>
-                  <ul>
-                    {group.entries.map(entry => (
-                      <li key={entry.repository} data-repository={entry.repository}>
-                        {entry.href ? <a href={entry.href}>{entry.name}</a> : <strong>{entry.name}</strong>}
-                        <p>{entry.description}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))}
-            </div>
-          </section>
         </section>
 
         <section className="section-band" id="hack-the-box">
