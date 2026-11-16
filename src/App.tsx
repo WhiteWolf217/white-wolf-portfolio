@@ -18,7 +18,7 @@ const projects = [
     title: "Graph-based intrusion detection",
     stack: "DA-IICT research · Python · CICIDS2017",
     description: "Graph neural networks for detecting suspicious network flows.",
-    detail: "I built two prototypes at DA-IICT: one evaluates a classifier offline on CICIDS2017, and the other uses live traffic to flag suspicious flows."
+    detail: "I built two prototypes at DA-IICT: one evaluates a classifier offline on CICIDS2017, and the other uses live traffic to flag suspicious flows.",
     links: [["Live prototype", `${github}/RealTime-Intrusion-Detection-GNNs`], ["Offline prototype", `${github}/Static-Intrusion-Detection-GNNs`]],
   },
   {
