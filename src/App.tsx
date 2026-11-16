@@ -105,11 +105,14 @@ const experience = [
 ];
 
 function App() {
-  const { coin, atmosphere, cursor } = usePortfolioMotion();
+  const { hero, watermark, atmosphere, cursor } = usePortfolioMotion();
 
   return (
     <>
       <div className="site-atmosphere" ref={atmosphere} aria-hidden="true" />
+      <div className="wolf-watermark" ref={watermark} aria-hidden="true">
+        <img src={logo} alt="" width="512" height="512" />
+      </div>
       <div className="scroll-cursor" ref={cursor} aria-hidden="true" />
       <a className="skip-link" href="#home">Skip to content</a>
       <header className="site-header">
@@ -126,7 +129,7 @@ function App() {
       </header>
 
       <main id="home">
-        <section className="shell hero" aria-labelledby="site-title">
+        <section className="shell hero" ref={hero} aria-labelledby="site-title">
           <div className="hero-copy">
             <p className="eyebrow"><span /> Offensive Security &amp; DevOps</p>
             <h1 id="site-title">White <span>Wolf</span></h1>
@@ -138,10 +141,7 @@ function App() {
             </div>
           </div>
           <div className="hero-art">
-            <div className="wolf-coin" ref={coin}>
-              <img className="coin-face coin-front" src={logo} alt="White and lavender geometric wolf emblem" width="512" height="512" />
-              <img className="coin-face coin-back" src={logo} alt="" width="512" height="512" />
-            </div>
+            <img src={logo} alt="White and lavender geometric wolf emblem" width="512" height="512" />
           </div>
         </section>
 
