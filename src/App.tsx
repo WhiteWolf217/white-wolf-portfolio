@@ -53,6 +53,7 @@ const results = [
     score: "111 / 111",
     description: "Tasks solved solo. 8,725 points and 139th of 5,637 teams.",
     certificateUrl: "https://drive.google.com/file/d/1P8ivv7gBUrEot4oGevLgUziNCAv8m_-o/view?usp=sharing",
+    link: { label: "Hack The Box event", href: "https://ctf.hackthebox.com/event/details/holmes-ctf-2026-the-reichenbach-directive-3504" },
   },
   {
     name: "Operation Cymbal: Cold Room",
