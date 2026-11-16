@@ -109,6 +109,17 @@ function App() {
 
   return (
     <>
+      <svg className="portfolio-filters" width="0" height="0" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="wolf-cutout" colorInterpolationFilters="sRGB">
+            <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" />
+            <feComponentTransfer result="cutout">
+              <feFuncA type="linear" slope="1.9" intercept="-0.28" />
+            </feComponentTransfer>
+            <feComposite in="SourceGraphic" in2="cutout" operator="in" />
+          </filter>
+        </defs>
+      </svg>
       <div className="site-atmosphere" ref={atmosphere} aria-hidden="true" />
       <div className="wolf-watermark" ref={watermark} aria-hidden="true">
         <img src={logo} alt="" width="512" height="512" />
