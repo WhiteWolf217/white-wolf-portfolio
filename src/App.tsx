@@ -1,3 +1,6 @@
+import { ExpandableCard } from "./ExpandableCard";
+import { usePortfolioMotion } from "./usePortfolioMotion";
+
 const logo = `${import.meta.env.BASE_URL}assets/images/white-wolf-mark.jpg`;
 const github = "https://github.com/WhiteWolf217";
 const htb = "https://profile.hackthebox.com/profile/019c8a07-e0c4-7293-a1a2-f0b469ed1f0f";
@@ -14,28 +17,33 @@ const projects = [
   {
     title: "Graph-based intrusion detection",
     stack: "DA-IICT research · Python · CICIDS2017",
-    description: "I built offline and live prototypes that represent network flows as graphs so a classifier can flag suspicious traffic.",
+    description: "Graph neural networks for detecting suspicious network flows.",
+    detail: "I built two prototypes at DA-IICT: one evaluates a classifier offline on CICIDS2017, and the other uses live traffic to flag suspicious flows."
     links: [["Live prototype", `${github}/RealTime-Intrusion-Detection-GNNs`], ["Offline prototype", `${github}/Static-Intrusion-Detection-GNNs`]],
   },
   {
     title: "OT syslog pipeline",
     stack: "OPSWAT–Pelorus · Python · Flask",
-    description: "Built a pipeline that forwarded syslog events through a Fend optical data diode to a live dashboard. It gave the receiving team visibility into events without opening a return path.",
+    description: "One-way OT logging with a live dashboard.",
+    detail: "The pipeline forwarded syslog events through a Fend optical data diode, so the receiving team could see events without opening a return path."
   },
   {
     title: "MetaDefender on Kubernetes",
     stack: "OPSWAT–Pelorus · Helm · kind · PostgreSQL",
-    description: "Deployed MetaDefender Core with Helm and in-cluster PostgreSQL. Documented the setup after resolving storage and release configuration issues.",
+    description: "A Helm deployment of MetaDefender Core with in-cluster PostgreSQL.",
+    detail: "I resolved storage and release configuration issues in the kind cluster and documented the deployment."
   },
   {
     title: "PhantomNet",
     stack: "ESP8266 · Wi-Fi security research",
-    description: "Built an ESP8266 lab project to explore Wi-Fi security and study what nearby devices expose. Used controlled environments for testing.",
+    description: "An ESP8266 project for studying Wi-Fi security.",
+    detail: "I used controlled lab environments to explore Wi-Fi behavior and study what nearby devices expose."
   },
   {
     title: "LNMHacks 8.0",
     stack: "CTF infrastructure · Google Cloud · Docker",
-    description: "Containerized CTF challenges and managed their lifecycle on Google Cloud, giving individual challenges isolated environments during the event.",
+    description: "Isolated CTF challenge environments on Google Cloud.",
+    detail: "I containerized the challenges with Docker and managed their deployment and teardown during the event."
   },
 ];
 
@@ -73,28 +81,36 @@ const badges = [
 
 const experience = [
   {
-    dates: "Jul – Aug 2026",
-    organization: "OPSWAT–Pelorus project",
-    role: "Network Engineering Intern",
-    description: "Built a syslog pipeline through an optical data diode and automated one-way file transfers. Deployed MetaDefender Core on Kubernetes with Helm and documented the setup.",
-  },
-  {
     dates: "Mar 2026 – Present",
     organization: "Cipher · LNMIIT",
     role: "Cybersecurity Coordinator",
-    description: "Lead security workshops and CTF practice. For LNMHacks 8.0, deployed isolated Docker challenge environments on Google Cloud.",
+    current: true,
+    description: "Lead security workshops and CTF practice at LNMIIT.",
+    detail: "I mentor peers through hands-on security practice. For LNMHacks 8.0, I deployed isolated Docker challenge environments on Google Cloud."
+  },
+  {
+    dates: "Jul – Aug 2026",
+    organization: "OPSWAT–Pelorus project",
+    role: "Network Engineering Intern",
+    description: "Built and deployed tooling for one-way OT data transfer.",
+    detail: "I built a syslog pipeline through an optical data diode, automated one-way file transfers, and documented a Helm deployment of MetaDefender Core."
   },
   {
     dates: "May – Jul 2025",
     organization: "DA-IICT",
     role: "Cybersecurity Research Intern",
-    description: "Researched graph neural networks for intrusion detection with Dr. Abhishek Jindal, using CICIDS2017 data and live network traffic.",
+    description: "Researched graph neural networks for intrusion detection.",
+    detail: "I worked with Dr. Abhishek Jindal and evaluated graph-based intrusion detection approaches using CICIDS2017 data and live network traffic."
   },
 ];
 
 function App() {
+  const { coin, atmosphere, cursor } = usePortfolioMotion();
+
   return (
     <>
+      <div className="site-atmosphere" ref={atmosphere} aria-hidden="true" />
+      <div className="scroll-cursor" ref={cursor} aria-hidden="true" />
       <a className="skip-link" href="#home">Skip to content</a>
       <header className="site-header">
         <div className="shell header-inner">
@@ -122,7 +138,10 @@ function App() {
             </div>
           </div>
           <div className="hero-art">
-            <img src={logo} alt="White and lavender geometric wolf emblem" width="512" height="512" />
+            <div className="wolf-coin" ref={coin}>
+              <img className="coin-face coin-front" src={logo} alt="White and lavender geometric wolf emblem" width="512" height="512" />
+              <img className="coin-face coin-back" src={logo} alt="" width="512" height="512" />
+            </div>
           </div>
         </section>
 
@@ -138,49 +157,73 @@ function App() {
             <h2>Selected work</h2>
             <a className="text-link" href="#spectre">SPECTRE case study <span aria-hidden="true">↓</span></a>
           </div>
-          <article className="feature" id="chainxray">
-            <div className="feature-copy">
-              <p className="eyebrow">Flagship project · Web3 security</p>
-              <h3>ChainXray</h3>
-              <p className="feature-summary">Follow an Ethereum transaction from wallet request to on-chain outcome.</p>
-              <p>I built ChainXray as a Windows desktop workbench. It decodes supported wallet requests and lets you compare them with transaction receipts and contract traces. Records stay in a local SQLite archive, and signing stays in the wallet.</p>
-              <p className="stack">Tauri · TypeScript · Ethereum · SQLite</p>
-              <a className="text-link" href={`${github}/ChainXray`}>Source and documentation <span aria-hidden="true">↗</span></a>
+          <ExpandableCard
+            id="chainxray"
+            className="feature"
+            title="ChainXray"
+            summary={
+              <>
+                <p className="eyebrow">Flagship project · Web3 security</p>
+                <h3>ChainXray</h3>
+                <p className="feature-summary">Follow an Ethereum transaction from wallet request to on-chain outcome.</p>
+                <p className="stack">Tauri · TypeScript · Ethereum · SQLite</p>
+              </>
+            }
+          >
+            <div className="feature-detail">
+              <div>
+                <p>I built ChainXray as a Windows desktop workbench. It decodes supported wallet requests and lets you compare them with transaction receipts and contract traces. Records stay in a local SQLite archive, and signing stays in the wallet.</p>
+                <a className="text-link" href={`${github}/ChainXray`}>Source and documentation <span aria-hidden="true">↗</span></a>
+              </div>
+              <div className="workflow">
+                <p className="eyebrow">Investigation workflow</p>
+                <ol>
+                  <li><strong>Wallet request</strong><span>Inspect the destination and decoded inputs.</span></li>
+                  <li><strong>Receipt and trace</strong><span>Check what executed after submission.</span></li>
+                  <li><strong>Evidence archive</strong><span>Keep the investigation record locally.</span></li>
+                </ol>
+              </div>
             </div>
-            <div className="workflow">
-              <p className="eyebrow">Investigation workflow</p>
-              <ol>
-                <li><strong>Wallet request</strong><span>Inspect the destination and decoded inputs.</span></li>
-                <li><strong>Receipt and trace</strong><span>Check what executed after submission.</span></li>
-                <li><strong>Evidence archive</strong><span>Keep the investigation record locally.</span></li>
-              </ol>
-            </div>
-          </article>
-          <article className="spectre-feature" id="spectre" aria-labelledby="spectre-title">
-            <div className="spectre-intro">
-              <p className="eyebrow">Red-team research · Local LLMs</p>
-              <h3 id="spectre-title">SPECTRE</h3>
-              <p className="spectre-lead">I built SPECTRE to study how a local language model can help coordinate an authorized red-team engagement.</p>
-              <p className="spectre-detail">The model can draft and revise a plan as new information comes in. The documented design requires operator confirmation before each tool run and records findings for review and reporting.</p>
-            </div>
+          </ExpandableCard>
+          <ExpandableCard
+            id="spectre"
+            className="spectre-feature"
+            title="SPECTRE"
+            summary={
+              <>
+                <p className="eyebrow">Red-team research · Local LLMs</p>
+                <h3>SPECTRE</h3>
+                <p className="spectre-lead">Local language model research for coordinating authorized red-team engagements.</p>
+              </>
+            }
+          >
             <dl className="spectre-facts">
               <div><dt>Local planning</dt><dd>A locally run model proposes and updates a plan.</dd></div>
-              <div><dt>Operator review</dt><dd>Individual actions go through an approval step.</dd></div>
+              <div><dt>Operator review</dt><dd>Individual tool runs require operator confirmation.</dd></div>
               <div><dt>Engagement reporting</dt><dd>Records findings and maps them to MITRE ATT&amp;CK for reports.</dd></div>
             </dl>
-          </article>
+          </ExpandableCard>
           <div className="project-grid">
             {projects.map(project => (
-              <article className="project-card" key={project.title}>
-                <p className="stack">{project.stack}</p>
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+              <ExpandableCard
+                key={project.title}
+                className="project-card"
+                title={project.title}
+                summary={
+                  <>
+                    <p className="stack">{project.stack}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </>
+                }
+              >
+                <p>{project.detail}</p>
                 {project.links && (
                   <div className="project-links">
                     {project.links.map(([label, href]) => <a className="text-link" key={href} href={href}>{label} <span aria-hidden="true">↗</span></a>)}
                   </div>
                 )}
-              </article>
+              </ExpandableCard>
             ))}
           </div>
         </section>
@@ -220,10 +263,20 @@ function App() {
             <ol className="timeline">
               {experience.map(item => (
                 <li key={item.organization}>
-                  <p className="eyebrow">{item.dates}</p>
-                  <h3>{item.role}</h3>
-                  <p className="organization">{item.organization}</p>
-                  <p>{item.description}</p>
+                  <ExpandableCard
+                    className={item.current ? "experience-card experience-current" : "experience-card"}
+                    title={item.role}
+                    summary={
+                      <>
+                        <p className="eyebrow">{item.dates}</p>
+                        <h3>{item.role}</h3>
+                        <p className="organization">{item.organization}</p>
+                        <p>{item.description}</p>
+                      </>
+                    }
+                  >
+                    <p>{item.detail}</p>
+                  </ExpandableCard>
                 </li>
               ))}
             </ol>
