@@ -52,11 +52,13 @@ const results = [
     name: "Hack The Box Holmes CTF 2026",
     score: "111 / 111",
     description: "Tasks solved solo. 8,725 points and 139th of 5,637 teams.",
+    certificateUrl: "https://drive.google.com/file/d/1P8ivv7gBUrEot4oGevLgUziNCAv8m_-o/view?usp=sharing",
   },
   {
     name: "Operation Cymbal: Cold Room",
     score: "18 / 18",
     description: "Challenges solved solo. 2,075 points and 222nd of 1,677 teams.",
+    certificateUrl: "https://drive.google.com/file/d/1FLc2rZliHVuz48mrnDVTF3WSChX9YP7L/view?usp=sharing",
     link: { label: "Hack The Box event", href: "https://ctf.hackthebox.com/event/details/operation-cymbal-cold-room-3631" },
   },
   {
@@ -251,7 +253,16 @@ function App() {
                   <h3>{result.name}</h3>
                   <strong>{result.score}</strong>
                   <p>{result.description}</p>
-                  {result.link && <a className="text-link" href={result.link.href}>{result.link.label} <span aria-hidden="true">↗</span></a>}
+                  {(result.certificateUrl || result.link) && (
+                    <div className="project-links">
+                      {result.certificateUrl && (
+                        <a className="text-link" href={result.certificateUrl} aria-label={`View ${result.name} certificate`}>
+                          View certificate <span aria-hidden="true">↗</span>
+                        </a>
+                      )}
+                      {result.link && <a className="text-link" href={result.link.href}>{result.link.label} <span aria-hidden="true">↗</span></a>}
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
