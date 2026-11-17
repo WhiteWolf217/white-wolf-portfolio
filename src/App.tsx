@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { ExpandableCard } from "./ExpandableCard";
 import { usePortfolioMotion } from "./usePortfolioMotion";
+import { PortfolioIntro } from "./PortfolioIntro";
 
 const logo = `${import.meta.env.BASE_URL}assets/images/white-wolf-mark.jpg`;
 const github = "https://github.com/WhiteWolf217";
@@ -108,7 +110,16 @@ const experience = [
 ];
 
 function App() {
-  const { hero, watermark, atmosphere, cursor } = usePortfolioMotion();
+  const [motionEnabled, setMotionEnabled] = useState(() => {
+    try { return localStorage.getItem("white-wolf-motion") !== "off"; } catch { return true; }
+  });
+  const [introKey, setIntroKey] = useState(0);
+  const { hero, watermark, atmosphere, cursor, progress, activeChapter } = usePortfolioMotion(motionEnabled);
+  const toggleMotion = () => {
+    const next = !motionEnabled;
+    setMotionEnabled(next);
+    try { localStorage.setItem("white-wolf-motion", next ? "on" : "off"); } catch { /* Optional preference. */ }
+  };
 
   return (
     <>
@@ -123,11 +134,14 @@ function App() {
           </filter>
         </defs>
       </svg>
+      {motionEnabled && <PortfolioIntro key={introKey} logo={logo} replay={introKey > 0} />}
+      <div id="portfolio-content" data-motion={motionEnabled ? "on" : "off"}>
       <div className="site-atmosphere" ref={atmosphere} aria-hidden="true" />
       <div className="wolf-watermark" ref={watermark} aria-hidden="true">
         <img src={logo} alt="" width="512" height="512" />
       </div>
       <div className="scroll-cursor" ref={cursor} aria-hidden="true" />
+      <div className="reading-progress" ref={progress} aria-hidden="true" />
       <a className="skip-link" href="#home">Skip to content</a>
       <header className="site-header">
         <div className="shell header-inner">
@@ -139,14 +153,21 @@ function App() {
             {navigation.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
             <a className="nav-contact" href="#contact">Contact</a>
           </nav>
+          <button className="motion-toggle" onClick={toggleMotion} aria-pressed={motionEnabled} aria-label="Enable decorative motion"><span aria-hidden="true">{motionEnabled ? "Ⅱ" : "▷"}</span><span>Motion {motionEnabled ? "on" : "off"}</span></button>
         </div>
       </header>
+      <nav className="chapter-nav" aria-label="Page chapters">
+        {[["home", "Intro"], ["projects", "Work"], ["hack-the-box", "CTFs"], ["experience", "Experience"], ["contact", "Contact"]].map(([id, label], index) => (
+          <a key={id} href={`#${id}`} aria-current={activeChapter === id ? "location" : undefined}><span className="chapter-label">{label}</span><span className="chapter-number">0{index + 1}</span></a>
+        ))}
+      </nav>
 
       <main id="home">
         <section className="shell hero" ref={hero} aria-labelledby="site-title">
+          <div className="hero-meta"><span>WHITEWOLF217 / PORTFOLIO</span><span>SECURITY MINDSET. BUILDER’S INSTINCT.</span></div>
           <div className="hero-copy">
             <p className="eyebrow"><span /> Offensive Security &amp; DevOps</p>
-            <h1 id="site-title">White <span>Wolf</span></h1>
+            <h1 id="site-title" tabIndex={-1}>White <span>Wolf<span className="title-period" aria-hidden="true">.</span></span></h1>
             <p className="hero-summary">Active Directory, web and API security, and reverse engineering.</p>
             <p className="hero-detail">I build tools for security investigations and am growing my DevOps experience with containers, cloud infrastructure, and CI/CD.</p>
             <div className="actions">
@@ -155,8 +176,12 @@ function App() {
             </div>
           </div>
           <div className="hero-art">
+            <div className="wolf-scene" aria-hidden="true"><i /><i /><i /><i /><i /><i /><svg viewBox="0 0 600 500" fill="none"><path d="M0 380 100 300 180 355 285 215 400 315 470 260 600 380M0 420 120 350 210 395 320 275 440 365 525 320 600 405M0 465 140 410 250 445 365 355 485 425 600 390" /></svg></div>
             <img src={logo} alt="White and lavender geometric wolf emblem" width="512" height="512" />
+            <span className="art-caption" aria-hidden="true">ANALYZE / BUILD / SECURE</span>
           </div>
+          <a className="hero-scroll" href="#projects"><span className="scroll-track" aria-hidden="true"><i /></span>Scroll to explore <span aria-hidden="true">↓</span></a>
+          <span className="hero-index" aria-hidden="true">01 — 05</span>
         </section>
 
         <section className="shell proof-band" aria-label="Security milestones">
@@ -168,7 +193,7 @@ function App() {
 
         <section className="shell content-section" id="projects">
           <div className="section-heading">
-            <h2>Selected work</h2>
+            <div><p className="chapter-kicker">02 / Built to investigate</p><h2>Selected <em>work.</em></h2></div>
             <a className="text-link" href="#spectre">SPECTRE case study <span aria-hidden="true">↓</span></a>
           </div>
           <ExpandableCard
@@ -245,7 +270,7 @@ function App() {
         <section className="section-band" id="hack-the-box">
           <div className="shell content-section">
             <div className="section-heading">
-              <h2>Hack The Box &amp; CTFs</h2>
+              <div><p className="chapter-kicker">03 / Proven in the arena</p><h2>Hack The Box<br />&amp; <em>CTFs.</em></h2></div>
               <a className="text-link" href={`${htb}?tab=badges`}>View completed badges <span aria-hidden="true">↗</span></a>
             </div>
             <div className="competition-grid">
@@ -281,8 +306,10 @@ function App() {
         </section>
 
         <section className="shell content-section" id="experience">
-          <div className="section-heading"><h2>Experience</h2></div>
           <div className="experience-layout">
+            <div className="experience-intro section-heading">
+              <div><p className="chapter-kicker">04 / Experience</p><h2>In the<br /> <em>field.</em></h2><p className="experience-intro-copy">Research, infrastructure, and a community of people who like figuring things out.</p><span className="thread-hint">Follow the thread <span aria-hidden="true">↘</span></span></div>
+            </div>
             <ol className="timeline">
               {experience.map(item => (
                 <li key={item.organization}>
@@ -291,7 +318,7 @@ function App() {
                     title={item.role}
                     summary={
                       <>
-                        <p className="eyebrow">{item.dates}</p>
+                        <p className="eyebrow"><span className="role-status">{item.current ? "Now" : "Previously"}</span>{item.dates}</p>
                         <h3>{item.role}</h3>
                         <p className="organization">{item.organization}</p>
                         <p>{item.description}</p>
@@ -303,6 +330,7 @@ function App() {
                 </li>
               ))}
             </ol>
+          </div>
             <aside className="credentials" aria-labelledby="credentials-heading">
               <h3 id="credentials-heading">Credentials &amp; education</h3>
               <dl>
@@ -324,7 +352,6 @@ function App() {
                 </div>
               </dl>
             </aside>
-          </div>
           <section className="devsecops-focus" id="devsecops" aria-labelledby="devsecops-title">
             <div>
               <h3 id="devsecops-title">DevSecOps in practice</h3>
@@ -346,7 +373,8 @@ function App() {
         <section className="section-band" id="contact">
           <div className="shell contact">
             <div>
-              <h2>Get in touch</h2>
+              <p className="chapter-kicker">05 / Start a conversation</p>
+              <h2>Let’s build<br /><em>something.</em></h2>
               <p>Open to security internships, research collaborations, and CTF teams.</p>
             </div>
             <div className="actions">
@@ -358,10 +386,12 @@ function App() {
       </main>
       <footer className="shell site-footer">
         <a className="brand" href="#home"><img src={logo} alt="" width="32" height="32" /><span>White Wolf</span></a>
-        <div><a href={github}>GitHub</a><a href={htb}>Hack The Box</a><a href="#home">Back to top ↑</a></div>
+        <div>{motionEnabled && <button className="replay-intro" onClick={() => setIntroKey(key => key + 1)}>Replay intro ↺</button>}<a href={github}>GitHub</a><a href={htb}>Hack The Box</a><a href="#home">Back to top ↑</a></div>
       </footer>
+      </div>
     </>
   );
 }
 
 export default App;
+

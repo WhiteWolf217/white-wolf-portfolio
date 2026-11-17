@@ -35,7 +35,7 @@ export function ExpandableCard({ id, className, title, summary, children }: Expa
           aria-expanded={expanded}
           aria-label={`Details for ${title}`}
           onClick={() => {
-            setPinned(!expanded);
+            setPinned(!pinned);
             setPreviewing(false);
           }}
         >
@@ -59,3 +59,4 @@ export function ExpandableCard({ id, className, title, summary, children }: Expa
     </article>
   );
 }
+
